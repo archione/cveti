@@ -25,7 +25,3 @@
 
 
 d]fkg[dopfskg';dlflkg
-
-
-
-somes
