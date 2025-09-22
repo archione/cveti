@@ -22,3 +22,5 @@
 
 ✅ Завершение покупки
 
+
+d]fkg[dopfskg';dlflkg
