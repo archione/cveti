@@ -1,0 +1,43 @@
+name: 🚀 Deploy to Production
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  deploy:
+    name: 🎯 Deploy to Server
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: 📥 Checkout code
+      uses: actions/checkout@v3
+      
+    - name: 🔐 Setup SSH
+      uses: webfactory/ssh-agent@v0.7.0
+      with:
+        ssh-private-key: ${{ secrets.SERVER_SSH_KEY }}
+        
+    - name: 🚀 Deploy to Production
+      run: |
+        ssh -o StrictHostKeyChecking=no ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} "
+          echo '📁 Starting deployment...'
+          cd /home/archakov/cveti
+          git fetch origin
+          git reset --hard origin/main
+          echo '✅ Code updated successfully!'
+          
+          # Добавьте команды для вашего проекта:
+          # echo '📦 Installing dependencies...'
+          # pip install -r requirements.txt
+          
+          # echo '🔄 Restarting services...'
+          # sudo systemctl restart nginx
+          # sudo systemctl restart your-app
+          
+          echo '🎉 Deployment completed!'
+          date
+        "
+
